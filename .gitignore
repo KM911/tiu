@@ -1,0 +1,21 @@
+# idea
+.idea/
+.vscode/
+
+# data
+.class
+data/
+
+
+#image
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+out
+target
+*.db
+test
+*.pprof
