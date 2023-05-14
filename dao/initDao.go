@@ -11,7 +11,7 @@ import (
 type ImageTable struct {
 	gorm.Model
 	ID       uint64 `gorm:"primarykey"`
-	Filename string `gorm:"type:varchar(100)"`
+	Filename string `gorm:"type:varchar(20)"`
 	Data     []byte `gorm:"type:blob"`
 	Length   int
 }

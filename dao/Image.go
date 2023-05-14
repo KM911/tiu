@@ -16,14 +16,30 @@ func SaveImage(filename string, data []byte, length int) string {
 	var Image ImageTable
 	db.Find(&Image, "length = ?", length)
 	if Image.ID != 0 {
-		db.Model(&Image).Update("data", data)
-		return Image.Filename
-	}
-	if !IsTIUFormat(filename) {
+		// 存在length相同的
+		if Image.Filename == filename {
+			return Image.Filename
+		} else {
+			filename = "KM" + oslib.RandomStringName(10) + path.Ext(filename)
+			go db.Create(&ImageTable{Filename: filename, Data: data, Length: length})
+			return filename
+		}
+	} else {
+		// 不存在length相同的
 		filename = "KM" + oslib.RandomStringName(10) + path.Ext(filename)
+		go db.Create(&ImageTable{Filename: filename, Data: data, Length: length})
+		return filename
 	}
-	db.Create(&ImageTable{Filename: filename, Data: data, Length: length})
-	return filename
+
+	//if Image.Filename == filename {
+	//	return Image.Filename
+	//} else {
+	//	if !IsTIUFormat(filename) {
+	//		filename = "KM" + oslib.RandomStringName(10) + path.Ext(filename)
+	//	}
+	//	go db.Create(&ImageTable{Filename: filename, Data: data, Length: length}).Error.Error()
+	//	return filename
+	//}
 }
 
 func DeleteImage(filename string) {

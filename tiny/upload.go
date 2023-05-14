@@ -95,5 +95,4 @@ func Upload2Server(file_ string) {
 	if viper.GetBool("upload.clip") {
 		oslib.Run("echo " + string(data[:n]) + " | clip")
 	}
-
 }

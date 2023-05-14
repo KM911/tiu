@@ -9,7 +9,7 @@ import (
 	"tiu/dao"
 )
 
-func Unpack() {
+func Backup() {
 	var iamgeList []dao.ImageTable
 	db, err := gorm.Open(sqlite.Open(filepath.Join(config.ExecutePath, "data", "image.db")), &gorm.Config{})
 	if err != nil {
